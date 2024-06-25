@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viewer - WebRTC Stream v0.2</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1 id="main-title">Viewer</h1>
+    <label for="broadcasterList">Choose a broadcaster:</label>
+    <select id="broadcasterList" aria-labelledby="main-title"></select>
+    <div class="video-container">
+        <video id="remoteVideo" playsinline autoplay muted controls aria-describedby="status"></video>
+    </div>
+    <div class="controls">
+        <button id="startButton" aria-label="Start Viewing">Start Viewing</button>
+        <button id="stopButton" aria-label="Stop Viewing" disabled>Stop Viewing</button>
+        <div id="status" role="status"></div>
+    </div>
+</div>
+<script src="dist/viewer.bundle.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch(error => {
+                console.log('ServiceWorker registration failed: ', error);
+            });
+    }
+</script>
+</body>
+</html>
